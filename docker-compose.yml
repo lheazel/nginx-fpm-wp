@@ -2,29 +2,16 @@ version: '2'
 services:
 
 # Nginx
-  web:
-    image: nginx:latest
+  ccb:
+    build: .
     ports:
-     - "8080:80"
+     - "80:80"
     volumes:
-     - ./code:/var/www/html
      - ./default.conf:/etc/nginx/conf.d/default.conf
-    networks:
-     - code-network
+     - ./index.php:/usr/share/nginx/html/index.php:rw
+#    networks:
+#     - code-network
 
-# php-fpn
-  php:
-#    build: .
-    image: wordpress:php7.2-fpm
-    volumes:
-     - ./code:/var/www/html
-    networks:
-     - code-network
-
-# bridge
-networks:
-  code-network:
-    driver: bridge
 
 
 # version: '2'
